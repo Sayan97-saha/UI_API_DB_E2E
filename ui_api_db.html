@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+    .error-message {
+        display: none;
+        color: red;
+        margin-left: 5px;
+    }
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+    input[type="text"], input[type="email"], input[type="date"], select {
+        width: 100%; /* Adjusted width */
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        display: inline-block;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 160px; /* Adjusted to align with labels */
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    table{
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+</style>
+</head>
+<body>
+
+<form id="registrationForm" action="#" method="post" onsubmit="return validateForm()" novalidate enctype="multipart/form-data">
+    <table>
+        <thead>
+            <h3>Please fill up the form carefully</h3>
+        </thead>
+        <tbody>
+            <tr>
+                <td><label for="firstName">First Name<span style="color: red;">*</span>:</label></td>
+                <td><input type="text" id="firstName" name="firstName"></td>
+                <td><span id="firstNameError" class="error-message"></span></td>
+            </tr>
+            <tr>
+                <td><label for="lastName">Last Name<span style="color: red;">*</span>:</label></td>
+                <td><input type="text" id="lastName" name="lastName"></td>
+                <td><span id="lastNameError" class="error-message"></span></td>
+            </tr>
+            <tr>
+                <td><label for="mobile">Mobile<span style="color: red;">*</span>:</label></td>
+                <td><input type="text" id="mobile" name="mobile" title="Please enter a 10 digit mobile number"></td>
+                <td><span id="mob_num_error" class="error-message"></span></td>
+            </tr>
+            <tr>
+                <td><label for="qualification">Highest Qualification<span style="color: red;">*</span>:</label></td>
+                <td>
+                    <select id="qualification_value" name="qualification">
+                        <option value="Select an option" selected>Select an option</option>
+                        <option value="graduate">Graduate</option>
+                        <option value="postgraduate">Post Graduate</option>
+                        <option value="10th">10th</option>
+                        <option value="12th">12th</option>
+                    </select>
+                </td>
+                <td><span id="qualification_error" class="error-message"></span></td>
+            </tr>
+
+            <tr>
+                <td><label for="govt_id">Government ID<span style="color: red;">*</span>:</label></td>
+                <td>
+                    <select id="govt_id_type" name="govt_id_type">
+                        <option value="Select an option" selected>Select an option</option>
+                        <option value="AADHAR">AADHAR</option>
+                        <option value="PAN">PAN</option>
+                    </select>
+                </td>
+                <td><span id="govt_id_type_error" class="error-message"></span></td>
+            </tr>
+
+            <tr>
+                <td><label for="govt_id_number">Govt. ID number<span style="color: red;">*</span>:</label></td>
+                <td><input type="text" id="govt_id_num" name="govt_id_num"></td>
+                <td><span id="govt_id_num_error" class="error-message"></span></td>
+            </tr>
+
+            <tr>
+                <td><label for="email">Email<span style="color: red;">*</span>:</label></td>
+                <td><input type="text" id="email" name="email"></td>
+                <td><span id="email_error" class="error-message"></span></td>
+            </tr>
+
+            <tr>
+                <td><label for="dob">Date of Birth<span style="color: red;">*</span>:</label></td>
+                <td><input type="date" id="dob" name="dob"></td>
+                <td><span id="dob_error" class="error-message"></span></td>
+            </tr>
+            <tr>
+                <td><label for="exp">Experience Range(years)<span style="color: red;">*</span>:</label></td>
+                <td>
+                    <label><input type="radio" id="exp" name="exp" value="0-3">0-3</label>
+                    <label><input type="radio" id="exp" name="exp" value="3-7">3-7</label>
+                    <label><input type="radio" id="exp" name="exp" value="7-10">7-10</label>
+                    <label><input type="radio" id="exp" name="exp" value="10-15">10-15</label>
+                    <label><input type="radio" id="exp" name="exp" value="15-20">15-20</label>
+                    <label><input type="radio" id="exp" name="exp" value="20+">20+</label>
+                </td>
+                <td><span id="exp_error" class="error-message"></span></td>
+            </tr>
+
+            <tr>
+                <td><label for="preferred_role">Preferred Role<span style="color: red;">*</span>:</label></td>
+                <td>
+                    <select id="preferred_role" name="preferred_role">
+                        <option value="Select an option" selected>Select an option</option>
+                        <option value="Automation Tester">Automation Tester</option>
+                        <option value="Functional Tester">Functional Tester</option>
+                        <option value="Developer">Developer</option>
+                        <option value="Support Engineer">Support Engineer</option>
+                        <option value="DevOps Engineer">DevOps Engineer</option>
+                    </select>
+                </td>
+                <td><span id="preferred_role_error" class="error-message"></span></td>
+            </tr>
+            <tr>
+                <td><label for="certifications">Certifications:</label></td>
+                <td><input type="text" id="certifications" name="certifications"></td>
+            </tr>
+
+            <tr>
+                  <td><label for="file">Upload resume(pdf only)<span style="color: red;">*</span>:</label></td>
+                  <td><input type="file" id="file" name="file"></td>
+                  <td><button type="button" onclick="file_upload('')">Upload</button></td>
+                  <td><span id="file_error" class="error-message"></span></td>
+
+            </tr>
+
+        </tbody>
+    </table>
+    <input type="submit" value="Submit">
+</form>
+<!-- <button onclick="test_api_call()">API_TEST</button> -->
+<div id="api_res"></div>
+
+<script>
+
+    function test_api_call(){
+        var api_url = "http://127.0.0.1:5000/test";
+        fetch(api_url)
+        .then(response => {
+            if(response.ok){
+               return response.json();
+            }
+            else{
+                return "Failed to get data!";
+            }
+        })
+        .then(data => {
+            var res_data = document.getElementById('api_res');
+            res_data.textContent = JSON.stringify(data, null, 2);
+        })
+    }
+
+    function file_upload(param_val){
+        
+        var return_val = "";
+        var fileInput = document.getElementById('file');
+        var fileError = document.getElementById('file_error'); 
+
+
+        // Check if a file is selected
+        
+        if(fileInput.files.length === 0){
+            fileError.innerText = "Please select a file to upload!"; // Clear error message text
+            fileError.style.display = "inline"; // Hide error message if field is not empty
+            return false;
+        }
+        else if(fileInput.files.length > 0) {
+            if(!fileInput.files[0].name.endsWith(".pdf")){
+                fileError.innerText = "Please choose a pdf file for upload!";
+                fileError.style.display = "inline";
+                return false;
+            }
+            else{
+                fileError.innerText = "";
+                fileError.style.display = "none";
+                return_val = fileInput.files[0].name;
+                if(param_val != "func_call"){
+                    alert(fileInput.files[0].name + " has been uploaded successfully!");
+                }
+            }
+            
+        }
+        return return_val;
+
+    }
+
+    function prep_form_data(file_name) {
+        var form = document.getElementById("registrationForm");
+  
+        // Create a FormData object to collect form data
+        var formData = new FormData(form);
+        //formData['file'].value = file_name;
+        // Convert FormData to JSON
+        var jsonData = {};
+        formData.forEach(function(value, key){
+            jsonData[key] = value;
+        });
+
+        // Display the JSON data
+        return jsonData;
+    }
+
+    function validateForm() {
+        if(!confirm("Are you sure you want to submit?")){
+            return false;
+        }
+        res_val = false;
+        var mobilePattern = /^[0-9]{10}$/;
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var pan_pattern = /^[A-Z0-9]{10}$/;
+        var incorrect_pan_pattern = /^[a-zA-Z0-9]{10}$/;
+        var aadhar_pattern = /^[0-9]{12}$/;
+        
+        var firstName = document.getElementById('firstName').value.trim();
+        var firstNameError = document.getElementById('firstNameError');
+        
+        var lastName = document.getElementById('lastName').value.trim();
+        var lastNameError = document.getElementById('lastNameError');
+        
+        var mobile = document.getElementById('mobile').value.trim();
+        var mobileError = document.getElementById('mob_num_error');
+
+        var qualification = document.getElementById('qualification_value').value.trim();
+        var qualificationError = document.getElementById('qualification_error');
+
+        var govt_id_type = document.getElementById('govt_id_type').value.trim();
+        var govt_id_type_error = document.getElementById('govt_id_type_error');
+
+        var govt_id_num = document.getElementById('govt_id_num').value.trim();
+        var govt_id_num_error = document.getElementById('govt_id_num_error');
+
+        var pref_role = document.getElementById('preferred_role').value.trim();
+        var pref_role_error = document.getElementById('preferred_role_error');
+
+        var email = document.getElementById('email').value.trim();
+        var emailError = document.getElementById('email_error');
+
+        var dob = document.getElementById('dob').value;
+        var dob_val_date = new Date(dob);
+        var today_date = new Date();
+        var dobError = document.getElementById('dob_error');
+
+        var exp_vals = document.getElementsByName('exp');
+        var selected_exp_val = "";
+        var expError = document.getElementById('exp_error');
+        
+        
+        
+        if (firstName === "") {
+            firstNameError.innerText = "Please enter your first name"; // Set error message text
+            firstNameError.style.display = "inline"; // Show error message
+            return false; // Prevent form submission
+        } else {
+            firstNameError.innerText = ""; // Clear error message text
+            firstNameError.style.display = "none"; // Hide error message if field is not empty
+        }
+
+        if (lastName === "") {
+            lastNameError.innerText = "Please enter your last name"; // Set error message text
+            lastNameError.style.display = "inline"; // Show error message
+            return false; // Prevent form submission
+        } else {
+            lastNameError.innerText = ""; // Clear error message text
+            lastNameError.style.display = "none"; // Hide error message if field is not empty
+        }
+        
+        if (mobile === "") {
+            mobileError.innerText = "Please enter your mobile number"; // Set error message text
+            mobileError.style.display = "inline"; // Show error message
+            return false; // Prevent form submission
+        }else if (!mobilePattern.test(mobile)) {
+            mobileError.innerText = "Please enter a valid 10 digit mobile number!";
+            mobileError.style.display = "inline";
+            return false;
+        }
+        else {
+            mobileError.innerText = ""; // Clear error message text
+            mobileError.style.display = "none"; // Hide error message if field is not empty
+        }
+        
+        if (qualification === "Select an option") {
+            qualificationError.innerText = "Please select a valid qualification!";
+            qualificationError.style.display = "inline";
+            return false;
+        }
+        else {
+            qualificationError.innerText = ""; // Clear error message text
+            qualificationError.style.display = "none"; // Hide error message if field is not empty
+        }
+
+        if (govt_id_type === "Select an option") {
+            govt_id_type_error.innerText = "Please select a valid Govt. ID!";
+            govt_id_type_error.style.display = "inline";
+            return false;
+        }
+        else {
+            govt_id_type_error.innerText = ""; // Clear error message text
+            govt_id_type_error.style.display = "none"; // Hide error message if field is not empty
+        }
+
+        //alert("aadhar_pattern.test(govt_id_num) = " + aadhar_pattern.test(govt_id_num));
+        if (govt_id_num === "") {
+            govt_id_num_error.innerText = "Please provide Govt ID number";
+            govt_id_num_error.style.display = "inline";
+            return false;
+        }
+        else if(govt_id_type === "AADHAR" && !aadhar_pattern.test(govt_id_num)) {
+            govt_id_num_error.innerText = "Please provide correct 12 digit AADHAR number";
+            govt_id_num_error.style.display = "inline";
+            return false;
+        }
+        else if(govt_id_type === "PAN" && incorrect_pan_pattern.test(govt_id_num) && !pan_pattern.test(govt_id_num)) {
+            govt_id_num_error.innerText = "Please check PAN number provided,  PAN number cannot contain Lower Case letters!";
+            govt_id_num_error.style.display = "inline";
+            return false;
+        }
+        else if(govt_id_type === "PAN" && !pan_pattern.test(govt_id_num)) {
+            govt_id_num_error.innerText = "Please provide correct 10 digit PAN number";
+            govt_id_num_error.style.display = "inline";
+            return false;
+        }
+        else {
+            govt_id_num_error.innerText = ""; // Clear error message text
+            govt_id_num_error.style.display = "none"; // Hide error message if field is not empty
+        }
+
+        if (email === "") {
+            emailError.innerText = "Please enter your email address";
+            emailError.style.display = "inline";
+            return false;
+        }
+        else if (!emailPattern.test(email)) {
+            emailError.innerText = "Please enter a valid email address!";
+            emailError.style.display = "inline";
+            return false;
+        }
+        else {
+            emailError.innerText = ""; // Clear error message text
+            emailError.style.display = "none"; // Hide error message if field is not empty
+        }
+        
+
+        if(isNaN(Date.parse(dob))) {
+            dobError.innerText = "Please enter a valid date";
+            dobError.style.display = "inline";
+            return false;
+        }
+        else if(dob_val_date > today_date){
+            dobError.innerText = "Date of Birth cannot be greater than today's date!";
+            dobError.style.display = "inline";
+            return false;
+        }
+        else {
+            dobError.innerText = ""; // Clear error message text
+            dobError.style.display = "none"; // Hide error message if field is not empty
+        }
+
+        for(var i = 0; i < exp.length; i++){
+            if(exp_vals[i].checked){
+                selected_exp_val = exp_vals[i].value;
+            }
+        }
+        if(selected_exp_val === ""){
+            expError.innerText = "Please select a valid experience range!";
+            expError.style.display = "inline";
+            return false;
+        }
+        else{
+            expError.innerText = "none";
+            expError.style.display = "none";
+        }
+
+        if (pref_role === "Select an option") {
+            pref_role_error.innerText = "Please select a valid value for Preferred Role!";
+            pref_role_error.style.display = "inline";
+            return false;
+        }
+        else {
+            pref_role_error.innerText = ""; // Clear error message text
+            pref_role_error.style.display = "none"; // Hide error message if field is not empty
+        }
+
+        var file_name = file_upload("func_call");
+        if(file_name === "" || file_name == false){
+            return false;
+        }
+
+        var form_data = prep_form_data(file_name);
+        //var json_data_1 = JSON.stringify(form_data, null, 2);
+        //alert("form_data = " + json_data_1);
+
+        delete form_data.file;
+        form_data.filename = file_name;
+        var json_data_2 = JSON.stringify(form_data, null, 2);
+        //alert("form_data = " + json_data_2);
+        post_data(json_data_2);
+        
+        return true;
+    }
+
+    function post_data(json_body){
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: json_body
+        };
+        var api_call_res;
+        
+        // // Send the POST request
+        try{
+            fetch('http://127.0.0.1:5000/post_endpoint', requestOptions)
+            .then(response => {
+                
+                if(response.ok){
+                    return response.json();
+                }
+            })
+            .then(data => {
+                var res_data = JSON.stringify(data, null, 2);
+                alert("Status = " + res_data);
+            })
+        }
+        catch(error){
+            document.getElementById('api_res').textContent = error.message;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>
